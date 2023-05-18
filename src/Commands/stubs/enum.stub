@@ -1,0 +1,22 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Packages\Enum\Enum;
+
+DummyPhpDoc
+final class DummyClass extends Enum
+{
+    DummyConstants
+
+    protected array $fillable = [
+        DummyFillable
+    ];
+
+    protected static function getEnumDefinition(): array
+    {
+        return [
+            DummyEnumDefinition
+        ];
+    }
+}

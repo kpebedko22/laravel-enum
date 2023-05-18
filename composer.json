@@ -14,5 +14,11 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^9.0|^10.0",
+        "illuminate/support": "^9.0|^10.0",
+        "illuminate/database": "10.x-dev",
+        "illuminate/console": "10.x-dev"
+    }
 }
