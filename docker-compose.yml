@@ -1,0 +1,19 @@
+services:
+    laravel-enum-fpm:
+        build:
+            args:
+                user: laravel_enum_user
+                uid: 1000
+            context: ./
+            dockerfile: build/fpm/Dockerfile
+        image: laravel-enum
+        container_name: laravel-enum-fpm
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - laravel-enum
+networks:
+    laravel-enum:
+        name: laravel-enum
+        driver: bridge

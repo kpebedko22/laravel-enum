@@ -207,4 +207,9 @@ abstract class Enum implements Arrayable, ArrayAccess, Castable
     {
         unset($this->attributes[$offset]);
     }
+
+    public function __toString(): string
+    {
+        return $this->getAttribute($this->primaryKey);
+    }
 }

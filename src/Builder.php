@@ -2,9 +2,10 @@
 
 namespace Kpebedko22\LaravelEnum;
 
-use Kpebedko22\LaravelEnum\Exceptions\EnumNotFound;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
+use Kpebedko22\LaravelEnum\Exceptions\EnumNotFound;
 
 class Builder
 {
@@ -66,14 +67,20 @@ class Builder
 
         } elseif (is_string($column)) {
 
+            $takingColumn = static fn($item) => Arr::get($item, $column);
+
             // TODO: take $column is not safe...
             $filterFunc = match ($operator) {
-                '=' => static fn($item) => $item[$column] == $value,
-                '!=', '<>' => static fn($item) => $item[$column] != $value,
-                'like' => static fn($item) => stripos(__($item[$column]), $value) !== false,
-                'in' => static fn($item) => in_array($item[$column], $value),
-                'null' => static fn($item) => is_null($item[$column]),
-                'not_null' => static fn($item) => !is_null($item[$column]),
+                '=' => static fn($item) => $takingColumn($item) == $value,
+                '!=', '<>' => static fn($item) => $takingColumn($item) != $value,
+                '>' => static fn($item) => $takingColumn($item) > $value,
+                '>=' => static fn($item) => $takingColumn($item) >= $value,
+                '<' => static fn($item) => $takingColumn($item) < $value,
+                '<=' => static fn($item) => $takingColumn($item) <= $value,
+                'like' => static fn($item) => stripos(__($takingColumn($item)), $value) !== false,
+                'in' => static fn($item) => in_array($takingColumn($item), $value),
+                'null' => static fn($item) => is_null($takingColumn($item)),
+                'not_null' => static fn($item) => !is_null($takingColumn($item)),
                 default => static fn($item) => true,
             };
 
@@ -249,9 +256,10 @@ class Builder
 
     public function get(): Collection
     {
-        return (new Collection($this->primaryKeys))->map(function ($id) {
-            return $this->find($id);
-        });
+        return (new Collection($this->primaryKeys))
+            ->transform(function ($id) {
+                return $this->find($id);
+            });
     }
 
     public function pluck(mixed $value, mixed $key = null): Collection

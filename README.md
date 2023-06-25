@@ -1,17 +1,9 @@
 # Enum Package
 
-## Register Provider
+## Installation
 
-Register package in `app.php` config:
-
-```injectablephp
-'providers' => [
-    // ...
-    
-    App\Packages\Enum\EnumServiceProvider::class,
-    
-    // ...
-]
+```shell
+composer require kpebedko22/laravel-enum
 ```
 
 ## Commands

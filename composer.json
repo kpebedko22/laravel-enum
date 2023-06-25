@@ -5,7 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Kpebedko22\\LaravelEnum\\": "src/"
+            "Kpebedko22\\LaravelEnum\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kpebedko22\\LaravelEnum\\Tests\\": "tests"
         }
     },
     "authors": [
@@ -20,5 +25,15 @@
         "illuminate/support": "^9.0|^10.0",
         "illuminate/database": "10.x-dev",
         "illuminate/console": "10.x-dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.3@dev",
+        "orchestra/testbench": "8.x-dev"
+    },
+    "scripts": {
+        "all": [
+            "@test"
+        ],
+        "test": "phpunit --testdox"
     }
 }
