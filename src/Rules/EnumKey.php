@@ -1,10 +1,10 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Rules;
+namespace Kpebedko22\Enum\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use InvalidArgumentException;
-use Kpebedko22\LaravelEnum\Enum;
+use Kpebedko22\Enum\Enum;
 
 class EnumKey implements Rule
 {

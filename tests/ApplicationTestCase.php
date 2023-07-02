@@ -1,8 +1,8 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Tests;
+namespace Kpebedko22\Enum\Tests;
 
-use Kpebedko22\LaravelEnum\EnumServiceProvider;
+use Kpebedko22\Enum\EnumServiceProvider;
 use Orchestra\Testbench\TestCase;
 
 class ApplicationTestCase extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Tests;
+namespace Kpebedko22\Enum\Tests;
 
 use PHPUnit\Framework\TestCase;
 

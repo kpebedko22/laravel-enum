@@ -1,9 +1,9 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Tests\Models;
+namespace Kpebedko22\Enum\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Kpebedko22\LaravelEnum\Tests\Enums\RoleEnum;
+use Kpebedko22\Enum\Tests\Enums\RoleEnum;
 
 /**
  * @property int $id

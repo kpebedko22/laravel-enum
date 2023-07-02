@@ -1,16 +1,16 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum;
+namespace Kpebedko22\Enum;
 
 use ArrayAccess;
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Database\Eloquent\MissingAttributeException;
 use Illuminate\Support\Collection;
-use Kpebedko22\LaravelEnum\Casts\EnumCast;
-use Kpebedko22\LaravelEnum\Concerns\HasAttributes;
-use Kpebedko22\LaravelEnum\Concerns\HasLanguage;
-use Kpebedko22\LaravelEnum\Concerns\Selectable;
+use Kpebedko22\Enum\Casts\EnumCast;
+use Kpebedko22\Enum\Concerns\HasAttributes;
+use Kpebedko22\Enum\Concerns\HasLanguage;
+use Kpebedko22\Enum\Concerns\Selectable;
 
 /**
  * @method static static|null find(mixed $id)

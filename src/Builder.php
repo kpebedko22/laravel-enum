@@ -1,11 +1,11 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum;
+namespace Kpebedko22\Enum;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
-use Kpebedko22\LaravelEnum\Exceptions\EnumNotFound;
+use Kpebedko22\Enum\Exceptions\EnumNotFound;
 
 class Builder
 {

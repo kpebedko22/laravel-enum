@@ -1,6 +1,6 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Commands;
+namespace Kpebedko22\Enum\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Collection;

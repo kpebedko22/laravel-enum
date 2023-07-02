@@ -1,24 +1,23 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Casts;
+namespace Kpebedko22\Enum\Casts;
 
-use Kpebedko22\LaravelEnum\Enum;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Database\Eloquent\Model;
+use Kpebedko22\Enum\Enum;
 
 class EnumCast implements CastsAttributes
 {
-    public function __construct(
-        protected string $enumClass
-    )
+    public function __construct(protected string $enumClass)
     {
     }
 
-    public function get($model, string $key, $value, array $attributes)
+    public function get(Model $model, string $key, mixed $value, array $attributes)
     {
         return $this->castEnum($value);
     }
 
-    public function set($model, string $key, $value, array $attributes)
+    public function set(Model $model, string $key, mixed $value, array $attributes)
     {
         $value = $this->castEnum($value);
 

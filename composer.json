@@ -5,12 +5,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Kpebedko22\\LaravelEnum\\": "src"
+            "Kpebedko22\\Enum\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kpebedko22\\LaravelEnum\\Tests\\": "tests"
+            "Kpebedko22\\Enum\\Tests\\": "tests"
         }
     },
     "authors": [

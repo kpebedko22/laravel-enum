@@ -1,8 +1,10 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Tests\Enums;
+namespace Kpebedko22\Enum\Tests\Enums;
 
-class StatusEnum extends \Kpebedko22\LaravelEnum\Enum
+use Kpebedko22\Enum\Enum;
+
+class StatusEnum extends Enum
 {
     public const NEW = 1;
     public const PENDING = 2;

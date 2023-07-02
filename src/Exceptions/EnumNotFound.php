@@ -1,6 +1,6 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Exceptions;
+namespace Kpebedko22\Enum\Exceptions;
 
 use RuntimeException;
 

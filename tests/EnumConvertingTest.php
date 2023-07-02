@@ -1,9 +1,9 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Tests;
+namespace Kpebedko22\Enum\Tests;
 
-use Kpebedko22\LaravelEnum\Tests\Enums\RoleEnum;
-use Kpebedko22\LaravelEnum\Tests\Enums\StatusEnum;
+use Kpebedko22\Enum\Tests\Enums\RoleEnum;
+use Kpebedko22\Enum\Tests\Enums\StatusEnum;
 use PHPUnit\Framework\TestCase;
 
 final class EnumConvertingTest extends TestCase

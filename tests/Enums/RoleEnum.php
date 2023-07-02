@@ -1,8 +1,8 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Tests\Enums;
+namespace Kpebedko22\Enum\Tests\Enums;
 
-use Kpebedko22\LaravelEnum\Enum;
+use Kpebedko22\Enum\Enum;
 
 /**
  * @property string $key

@@ -1,10 +1,10 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Concerns;
+namespace Kpebedko22\Enum\Concerns;
 
-use Kpebedko22\LaravelEnum\Enum;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Kpebedko22\Enum\Enum;
 use ReflectionClass;
 
 trait Selectable

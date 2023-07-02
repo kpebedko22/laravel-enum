@@ -1,8 +1,8 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Tests;
+namespace Kpebedko22\Enum\Tests;
 
-use Kpebedko22\LaravelEnum\Tests\Enums\RoleEnum;
+use Kpebedko22\Enum\Tests\Enums\RoleEnum;
 use PHPUnit\Framework\TestCase;
 
 final class EnumBuilderTest extends TestCase

@@ -1,6 +1,6 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum\Concerns;
+namespace Kpebedko22\Enum\Concerns;
 
 trait HasLanguage
 {

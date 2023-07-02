@@ -1,11 +1,11 @@
 <?php
 
-namespace Kpebedko22\LaravelEnum;
+namespace Kpebedko22\Enum;
 
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\ServiceProvider;
-use Kpebedko22\LaravelEnum\Commands\MakeEnumCommand;
-use Kpebedko22\LaravelEnum\Rules\EnumKey;
+use Kpebedko22\Enum\Commands\MakeEnumCommand;
+use Kpebedko22\Enum\Rules\EnumKey;
 
 class EnumServiceProvider extends ServiceProvider
 {
