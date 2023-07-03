@@ -2,12 +2,16 @@
 
 namespace DummyNamespace;
 
-use App\Packages\Enum\Enum;
+use Kpebedko22\Enum\Enum;
 
 DummyPhpDoc
 final class DummyClass extends Enum
 {
     DummyConstants
+
+    protected string $primaryKey = 'DummyPrimaryKey';
+
+    protected ?string $optionLabel = null;
 
     protected array $fillable = [
         DummyFillable

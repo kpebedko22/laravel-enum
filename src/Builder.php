@@ -267,6 +267,13 @@ class Builder
         return $this->get()->pluck($value, $key);
     }
 
+    public function toOptionsArray(): array
+    {
+        return $this->get()
+            ->mapWithKeys(static fn(Enum $enum) => $enum->toOption())
+            ->toArray();
+    }
+
     protected function updatePrimaryKeys(array $keys, string $boolean): void
     {
         $boolean = strtolower($boolean);

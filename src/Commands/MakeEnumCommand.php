@@ -75,6 +75,7 @@ class MakeEnumCommand extends GeneratorCommand
         }
 
         $stub = $this->buildConstants($stub, $constants, $type);
+        $stub = $this->buildPrimaryKey($stub, $primaryKey);
         $stub = $this->buildFillable($stub, $primaryKey, $fillable);
         $stub = $this->buildPhpDoc($stub, $primaryKey, $type, $fillable);
         $stub = $this->buildEnumDefinition($stub, $constants, $primaryKey, $fillable);
@@ -99,6 +100,15 @@ class MakeEnumCommand extends GeneratorCommand
         return str_replace(
             'DummyConstants',
             $result,
+            $stub
+        );
+    }
+
+    protected function buildPrimaryKey(string $stub, string $primaryKey): string
+    {
+        return str_replace(
+            'DummyPrimaryKey',
+            $primaryKey,
             $stub
         );
     }

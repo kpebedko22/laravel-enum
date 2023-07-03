@@ -10,7 +10,7 @@ use Illuminate\Support\Collection;
 use Kpebedko22\Enum\Casts\EnumCast;
 use Kpebedko22\Enum\Concerns\HasAttributes;
 use Kpebedko22\Enum\Concerns\HasLanguage;
-use Kpebedko22\Enum\Concerns\Selectable;
+use Kpebedko22\Enum\Concerns\HasOptionLabel;
 
 /**
  * @method static static|null find(mixed $id)
@@ -39,12 +39,13 @@ use Kpebedko22\Enum\Concerns\Selectable;
  * @method static float|int avg(string $column)
  * @method static float|int average(string $column)
  * @method static static random()
+ * @method static array toOptionsArray()
  */
 abstract class Enum implements Arrayable, ArrayAccess, Castable
 {
     use HasAttributes,
         HasLanguage,
-        Selectable;
+        HasOptionLabel;
 
     protected string $primaryKey = 'id';
 

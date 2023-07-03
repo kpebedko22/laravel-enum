@@ -2,12 +2,11 @@
 
 namespace Kpebedko22\Enum\Concerns;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Kpebedko22\Enum\Enum;
+use Kpebedko22\Enum\Exceptions\EnumOptionLabelWrongType;
 use ReflectionClass;
 
-trait Selectable
+trait HasOptionLabel
 {
     /**
      * Better change default value, to use specific column as label.
@@ -17,24 +16,14 @@ trait Selectable
      */
     protected ?string $optionLabel = null;
 
-    public static function selectOptions(): array
-    {
-        /** @var Collection $collection */
-        $collection = static::all();
-
-        $options = $collection->mapWithKeys(fn(Enum $enum) => $enum->toSelectOption());
-
-        return $options->toArray();
-    }
-
-    protected function toSelectOption(): array
+    public function toOption(): array
     {
         return [
             $this->getKey() => $this->getOptionLabel(),
         ];
     }
 
-    protected function getOptionLabel(): mixed
+    public function getOptionLabel(): string
     {
         if (is_null($this->optionLabel)) {
 
@@ -45,6 +34,12 @@ trait Selectable
             return Str::headline(Str::lower($constantName));
         }
 
-        return $this->getAttribute($this->optionLabel);
+        $optionLabel = $this->getAttribute($this->optionLabel);
+
+        if (!is_string($optionLabel)) {
+            throw new EnumOptionLabelWrongType();
+        }
+
+        return $optionLabel;
     }
 }

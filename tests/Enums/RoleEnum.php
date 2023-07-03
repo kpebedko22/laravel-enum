@@ -15,6 +15,8 @@ final class RoleEnum extends Enum
 
     protected string $primaryKey = 'key';
 
+    protected ?string $optionLabel = null;
+
     protected array $fillable = [
         'key',
         'is_default',
