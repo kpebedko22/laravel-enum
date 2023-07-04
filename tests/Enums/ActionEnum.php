@@ -17,7 +17,8 @@ class ActionEnum extends Enum
     protected string $primaryKey = 'key';
 
     protected array $fillable = [
-        'key'
+        'key',
+        'label',
     ];
 
     protected static function getEnumDefinition(): array
@@ -25,20 +26,71 @@ class ActionEnum extends Enum
         return [
             [
                 'key' => self::VIEW,
-                'is_available_to_everyone' => true,
+                'label' => 'View Label',
             ],
             [
                 'key' => self::CREATE,
-                'is_available_to_everyone' => false,
+                'label' => 'Create Label',
             ],
             [
                 'key' => self::EDIT,
-                'is_available_to_everyone' => false,
+                'label' => 'Edit Label',
             ],
             [
                 'key' => self::DELETE,
-                'is_available_to_everyone' => false,
+                'label' => 'Delete Label',
             ],
         ];
+    }
+
+    public function getNameAttribute(): string
+    {
+        return __("enum/action.$this->key");
+    }
+
+    public function getObjectAttribute(): object
+    {
+        return (object)['example'];
+    }
+
+    public function getStringAttribute(): string
+    {
+        return 'string';
+    }
+
+    public function getBoolAttribute(): bool
+    {
+        return true;
+    }
+
+    public function getIntAttribute(): int
+    {
+        return 10;
+    }
+
+    public function getFloatAttribute(): float
+    {
+        return 20.50;
+    }
+
+    public function getClassAttribute(): object
+    {
+        return new class {
+        };
+    }
+
+    public function getStringableClassAttribute(): object
+    {
+        return new class {
+            public function __toString(): string
+            {
+                return 'example';
+            }
+        };
+    }
+
+    public function getNullAttribute()
+    {
+        return null;
     }
 }

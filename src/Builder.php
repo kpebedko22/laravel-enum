@@ -29,7 +29,8 @@ class Builder
         );
 
         if (count($items)) {
-            $data = array_shift($items);
+            $items = array_reverse($items);
+            $data = array_pop($items);
 
             $clone = (clone $this->enum);
             $clone->fill($data);
@@ -226,7 +227,8 @@ class Builder
 
     public function first(): Enum|null
     {
-        $key = array_shift($this->primaryKeys);
+        $keys = array_reverse($this->primaryKeys);
+        $key = array_pop($keys);
 
         return $this->find($key);
     }
@@ -272,6 +274,13 @@ class Builder
         return $this->get()
             ->mapWithKeys(static fn(Enum $enum) => $enum->toOption())
             ->toArray();
+    }
+
+    public function useOptionAttribute(?string $optionAttribute): static
+    {
+        $this->enum->setOptionAttribute($optionAttribute);
+
+        return $this;
     }
 
     protected function updatePrimaryKeys(array $keys, string $boolean): void

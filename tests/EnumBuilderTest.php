@@ -7,6 +7,13 @@ use PHPUnit\Framework\TestCase;
 
 final class EnumBuilderTest extends TestCase
 {
+    public function test_first_method_works_correctly(): void
+    {
+        $firstRole = RoleEnum::first();
+
+        $this->assertInstanceOf(RoleEnum::class, $firstRole);
+    }
+
     public function test_where_method_simple_mode(): void
     {
         $searchKey = RoleEnum::ADMIN;

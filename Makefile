@@ -1,7 +1,7 @@
-up:
+ul:
 	docker-compose up -d
 
-down:
+dl:
 	docker-compose down
 
 dump-autoload:
