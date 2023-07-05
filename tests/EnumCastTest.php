@@ -3,6 +3,7 @@
 namespace Kpebedko22\Enum\Tests;
 
 use Kpebedko22\Enum\Tests\Enums\RoleEnum;
+use Kpebedko22\Enum\Tests\Enums\StatusEnum;
 use Kpebedko22\Enum\Tests\Models\Example;
 
 class EnumCastTest extends ApplicationTestCase
@@ -59,5 +60,24 @@ class EnumCastTest extends ApplicationTestCase
 
         $this->assertEquals($model->role, RoleEnum::find(RoleEnum::ADMIN));
         $this->assertEmpty($model->getChanges());
+    }
+
+    public function test_create_model_with_using_null_enum(): void
+    {
+        $id = Example::create(['role' => null])->id;
+
+        $model = Example::find($id);
+
+        $this->assertNull($model->role);
+    }
+
+    public function test_create_model_using_string_integer(): void
+    {
+        $enumId = StatusEnum::NEW;
+        $id = Example::create(['status' => (string)$enumId])->id;
+
+        $model = Example::find($id);
+
+        $this->assertEquals($model->status->id, $enumId);
     }
 }

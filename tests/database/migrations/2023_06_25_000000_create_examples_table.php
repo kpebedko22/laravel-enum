@@ -10,6 +10,7 @@ return new class extends Migration {
         Schema::create('examples', function (Blueprint $table) {
             $table->id();
             $table->string('role')->nullable();
+            $table->unsignedInteger('status')->nullable();
         });
     }
 

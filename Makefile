@@ -9,3 +9,9 @@ dump-autoload:
 
 test:
 	composer test
+
+test-cov-text:
+	composer exec --verbose phpunit tests -- --coverage-text
+
+test-cov-html:
+	composer exec --verbose phpunit tests -- --coverage-html coverage

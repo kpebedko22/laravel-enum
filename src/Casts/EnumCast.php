@@ -34,22 +34,11 @@ class EnumCast implements CastsAttributes
 
         $value = $this->getCastableValue($value);
 
-        if ($value === null) {
-            return null;
-        }
-
         return call_user_func([$this->enumClass, 'find'], $value);
     }
 
     protected function getCastableValue(mixed $value): mixed
     {
-        // If the enum has overridden the 'parseDatabase' method, use it to get the cast value
-        $value = call_user_func([$this->enumClass, 'parseDatabase'], $value);
-
-        if ($value === null) {
-            return null;
-        }
-
         // If the value exists in the enum (using strict type checking) return it
         if (call_user_func([$this->enumClass, 'isPrimaryKeyAvailable'], $value)) {
             return $value;

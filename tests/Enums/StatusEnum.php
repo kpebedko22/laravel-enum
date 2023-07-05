@@ -4,6 +4,9 @@ namespace Kpebedko22\Enum\Tests\Enums;
 
 use Kpebedko22\Enum\Enum;
 
+/**
+ * @property int $id
+ */
 class StatusEnum extends Enum
 {
     public const NEW = 1;
