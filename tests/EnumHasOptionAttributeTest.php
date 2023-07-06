@@ -7,9 +7,6 @@ use Kpebedko22\Enum\Tests\Enums\ActionEnum;
 
 final class EnumHasOptionAttributeTest extends ApplicationTestCase
 {
-    const LOCALE_EN = 'en';
-    const LOCALE_RU = 'ru';
-
     public function test_enum_via_reflection_works_correctly_for_builder()
     {
         $builder = ActionEnum::useOptionAttribute(null);

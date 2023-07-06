@@ -2,17 +2,14 @@
 
 namespace Kpebedko22\Enum\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use InvalidArgumentException;
 use Kpebedko22\Enum\Enum;
 
-class EnumKey implements Rule
+class EnumKey implements ValidationRule
 {
-    protected string $rule = 'enum_key';
-
-    public function __construct(
-        protected string $enumClass
-    )
+    public function __construct(protected string $enumClass)
     {
         if (!class_exists($this->enumClass)) {
             throw new InvalidArgumentException("Cannot validate against the enum, the class {$this->enumClass} doesn't exist.");
@@ -23,20 +20,17 @@ class EnumKey implements Rule
         }
     }
 
-    public function passes($attribute, $value): bool
-    {
-        return $this->enumClass::isPrimaryKeyAvailable($value);
-    }
-
-    public function message(): string
+    protected function message(): string
     {
         return trans()->has('validation.enum_key')
             ? __('validation.enum_key')
             : __('enumPackage::validation.enum_key');
     }
 
-    public function __toString(): string
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        return "{$this->rule}:{$this->enumClass}";
+        if (!$this->enumClass::isPrimaryKeyAvailable($value)) {
+            $fail($this->message());
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Kpebedko22\Enum\Tests;
 
+use Kpebedko22\Enum\Tests\Enums\ActionEnum;
 use Kpebedko22\Enum\Tests\Enums\RoleEnum;
 use PHPUnit\Framework\TestCase;
 
@@ -113,4 +114,18 @@ final class EnumBuilderTest extends TestCase
 //        RoleEnum::where('key', '=',$searchKey)
 //            ->orWhere('is_default', '=', )
 //    }
+
+    public function test_random_function()
+    {
+        $allKeys = ActionEnum::availablePrimaryKeys();
+
+        $item = ActionEnum::random();
+
+        $this->assertInstanceOf(ActionEnum::class, $item);
+        $this->assertContains($item->getKey(), $allKeys);
+
+        $anotherItem = ActionEnum::whereNot(['key' => $item->getKey()])->random();
+
+        $this->assertNotEquals($item->getKey(), $anotherItem->getKey());
+    }
 }

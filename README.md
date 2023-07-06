@@ -13,16 +13,16 @@ composer require kpebedko22/laravel-enum
 There is a command for creating enum classes in `app\Enums\` folder:
 
 ```shell
-php artisan make:enum {name} {--Q|questionable}
+php artisan make:enum {name} {--W|wizard}
 ```
 
 For example:
 
 ```shell
-php artisan make:enum TestEnum -Q
+php artisan make:enum TestEnum -W
 ```
 
-Option `-Q` is responsible for questions during creating enum class. User will be asked for:
+Option `-W` is responsible for questions during creating enum class. User will be asked for:
 
 - Constants (separated by comma)
 - Primary key type (int / string)

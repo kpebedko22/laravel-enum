@@ -45,7 +45,6 @@ use Kpebedko22\Enum\Concerns\HasOptionAttribute;
 abstract class Enum implements Arrayable, ArrayAccess, Castable
 {
     use HasAttributes,
-        HasLanguage,
         HasOptionAttribute;
 
     protected string $primaryKey = 'id';

@@ -7,6 +7,9 @@ use Orchestra\Testbench\TestCase;
 
 class ApplicationTestCase extends TestCase
 {
+    protected const LOCALE_EN = 'en';
+    protected const LOCALE_RU = 'ru';
+
     public function setUp(): void
     {
         parent::setUp();

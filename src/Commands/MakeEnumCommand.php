@@ -11,7 +11,7 @@ class MakeEnumCommand extends GeneratorCommand
     protected const TYPE_INT = 'int';
     protected const TYPE_STR = 'string';
 
-    protected $signature = 'make:enum {name} {--Q|questionable}';
+    protected $signature = 'make:enum {name} {--W|wizard}';
 
     protected $description = 'Create a new enum class';
 
@@ -38,7 +38,7 @@ class MakeEnumCommand extends GeneratorCommand
     {
         $stub = parent::buildClass($name);
 
-        if ($this->option('questionable')) {
+        if ($this->option('wizard')) {
 
             $constants = $this->ask('Input constants of enum (separated by comma)');
 

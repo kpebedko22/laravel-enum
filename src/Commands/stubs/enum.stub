@@ -11,7 +11,7 @@ final class DummyClass extends Enum
 
     protected string $primaryKey = 'DummyPrimaryKey';
 
-    protected ?string $optionLabel = null;
+    protected ?string $optionAttribute = null;
 
     protected array $fillable = [
         DummyFillable
