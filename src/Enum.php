@@ -5,11 +5,9 @@ namespace Kpebedko22\Enum;
 use ArrayAccess;
 use Illuminate\Contracts\Database\Eloquent\Castable;
 use Illuminate\Contracts\Support\Arrayable;
-use Illuminate\Database\Eloquent\MissingAttributeException;
 use Illuminate\Support\Collection;
 use Kpebedko22\Enum\Casts\EnumCast;
 use Kpebedko22\Enum\Concerns\HasAttributes;
-use Kpebedko22\Enum\Concerns\HasLanguage;
 use Kpebedko22\Enum\Concerns\HasOptionAttribute;
 
 /**
@@ -115,16 +113,6 @@ abstract class Enum implements Arrayable, ArrayAccess, Castable
         return $this->getAttribute($this->getPrimaryKey());
     }
 
-    public function __get(string $key)
-    {
-        return $this->getAttribute($key);
-    }
-
-    public function __set(string $key, mixed $value)
-    {
-        $this->setAttribute($key, $value);
-    }
-
     public static function isPrimaryKeyAvailable(mixed $id): bool
     {
         $keys = static::availablePrimaryKeys();
@@ -169,10 +157,17 @@ abstract class Enum implements Arrayable, ArrayAccess, Castable
 
     public function newQuery(): Builder
     {
-        return new Builder(
-            new static,
-            static::getEnumDefinition(),
-        );
+        return new Builder(new static, static::getEnumDefinition());
+    }
+
+    public function __get(string $key)
+    {
+        return $this->getAttribute($key);
+    }
+
+    public function __set(string $key, mixed $value)
+    {
+        $this->setAttribute($key, $value);
     }
 
     public static function __callStatic($method, $parameters)
@@ -185,13 +180,14 @@ abstract class Enum implements Arrayable, ArrayAccess, Castable
         return $this->newQuery()->{$method}(...$parameters);
     }
 
+    public function __toString(): string
+    {
+        return $this->getAttribute($this->primaryKey);
+    }
+
     public function offsetExists(mixed $offset): bool
     {
-        try {
-            return !is_null($this->getAttribute($offset));
-        } catch (MissingAttributeException) {
-            return false;
-        }
+        return !is_null($this->getAttribute($offset));
     }
 
     public function offsetGet(mixed $offset): mixed
@@ -207,10 +203,5 @@ abstract class Enum implements Arrayable, ArrayAccess, Castable
     public function offsetUnset(mixed $offset): void
     {
         unset($this->attributes[$offset]);
-    }
-
-    public function __toString(): string
-    {
-        return $this->getAttribute($this->primaryKey);
     }
 }
