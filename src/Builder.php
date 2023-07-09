@@ -171,25 +171,16 @@ class Builder
             throw new InvalidArgumentException('Order direction must be "asc" or "desc".');
         }
 
-        $arr = $this->definition;
+        $arr = $this->getPreparedDefinition();
 
-        usort($arr, static function ($a, $b) use ($column, $direction) {
-
-            if ($a == $b) {
-                return 0;
-            }
-
-            if ($direction === 'asc') {
-
-                return ($a[$column] < $b[$column]) ? -1 : 1;
-            }
-
-            return ($a[$column] > $b[$column]) ? -1 : 1;
-        });
+        usort($arr, static fn($a, $b) => $direction === 'asc'
+            ? $a[$column] <=> $b[$column]
+            : $b[$column] <=> $a[$column]
+        );
 
         $keys = array_column($arr, $this->enum->getPrimaryKey());
 
-        $this->orderPrimaryKeys($keys);
+        $this->primaryKeys = $keys;
 
         return $this;
     }
@@ -301,15 +292,16 @@ class Builder
         $this->primaryKeys = array_unique($tmp);
     }
 
-    protected function orderPrimaryKeys(array $keys): void
-    {
-        $this->primaryKeys = array_intersect($keys, $this->primaryKeys);
-    }
-
     protected function getPreparedDefinition(): array
     {
-        return array_filter($this->definition, function (array $item) {
-            return in_array($item[$this->enum->getPrimaryKey()], $this->primaryKeys, true);
-        });
+        $primaryKeys = array_column($this->definition, $this->enum->getPrimaryKey());
+
+        return array_map(function ($key) use ($primaryKeys) {
+
+            $index = array_search($key, $primaryKeys);
+
+            return $this->definition[$index];
+
+        }, $this->primaryKeys);
     }
 }
