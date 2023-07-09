@@ -19,13 +19,13 @@ class Builder
         $this->primaryKeys = array_column($this->definition, $enum->getPrimaryKey());
     }
 
-    public function find(mixed $id): ?Enum
+    public function find(mixed $key): ?Enum
     {
         $primaryKey = $this->enum->getPrimaryKey();
 
         $items = array_filter(
             $this->getPreparedDefinition(),
-            static fn(array $item) => $item[$primaryKey] == $id
+            static fn(array $item) => $item[$primaryKey] == $key
         );
 
         if (count($items)) {
@@ -41,14 +41,14 @@ class Builder
         return null;
     }
 
-    public function findOrFail(mixed $id): Enum
+    public function findOrFail(mixed $key): Enum
     {
-        $item = $this->find($id);
+        $item = $this->find($key);
 
         if (!$item) {
             throw new EnumNotFound(sprintf(
                 "Enum item not found for [%s = %s] in [%s]",
-                $this->enum->getPrimaryKey(), $id, get_class($this->enum),
+                $this->enum->getPrimaryKey(), $key, get_class($this->enum),
             ));
         }
 
@@ -259,8 +259,8 @@ class Builder
     public function get(): Collection
     {
         return (new Collection($this->primaryKeys))
-            ->transform(function ($id) {
-                return $this->find($id);
+            ->transform(function ($key) {
+                return $this->find($key);
             });
     }
 

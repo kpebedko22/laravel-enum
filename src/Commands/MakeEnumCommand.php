@@ -11,7 +11,7 @@ class MakeEnumCommand extends GeneratorCommand
     protected const TYPE_INT = 'int';
     protected const TYPE_STR = 'string';
 
-    protected $signature = 'make:enum {name} {--W|wizard}';
+    protected $signature = 'make:enum {name} {--W|wizard} {--force}';
 
     protected $description = 'Create a new enum class';
 
@@ -40,7 +40,7 @@ class MakeEnumCommand extends GeneratorCommand
 
         if ($this->option('wizard')) {
 
-            $constants = $this->ask('Input constants of enum (separated by comma)');
+            $constants = $this->ask('Enter constants (separated by comma)');
 
             $constants = is_string($constants)
                 ? collect((explode(',', $constants)))
@@ -48,17 +48,19 @@ class MakeEnumCommand extends GeneratorCommand
                     ->map(fn(string $val) => str_replace(' ', '_', $val))
                     ->filter()
                     ->values()
-                : collect();
+                : collect(['example']);
 
             $type = $this->choice('Which type of constants?', [
-                1 => self::TYPE_INT,
-                2 => self::TYPE_STR,
-            ], self::TYPE_INT);
+                self::TYPE_STR,
+                self::TYPE_INT,
+            ], self::TYPE_STR);
 
-            $primaryKey = $this->ask('Input primary key (one word)');
-            $primaryKey = is_string($primaryKey) ? $primaryKey : 'id';
+            $type = is_null($type) ? self::TYPE_STR : $type;
 
-            $fillable = $this->ask('Input additional fillable parameters (separated by comma)');
+            $primaryKey = $this->ask('Enter primary key name (one word)');
+            $primaryKey = is_string($primaryKey) ? $primaryKey : 'key';
+
+            $fillable = $this->ask('Enter additional fillable attributes (separated by comma)');
             $fillable = is_string($fillable)
                 ? collect((explode(',', $fillable)))
                     ->map(fn(string $val) => trim($val))
@@ -69,8 +71,8 @@ class MakeEnumCommand extends GeneratorCommand
         } else {
 
             $constants = collect(['example']);
-            $primaryKey = 'id';
-            $type = self::TYPE_INT;
+            $primaryKey = 'key';
+            $type = self::TYPE_STR;
             $fillable = collect();
         }
 
@@ -85,9 +87,10 @@ class MakeEnumCommand extends GeneratorCommand
 
     protected function buildConstants(string $stub, Collection $constants, string $type): string
     {
-        $constValue = $type === self::TYPE_STR
-            ? static fn($value, $pos) => "'" . Str::lower($value) . "'"
-            : static fn($value, $pos) => $pos + 1;
+        $constValue = match ($type) {
+            self::TYPE_INT => static fn($value, $pos) => $pos + 1,
+            default => static fn($value, $pos) => "'" . Str::lower($value) . "'",
+        };
 
         $result = $constants
             ->map(function (string $const, string $index) use ($constValue) {

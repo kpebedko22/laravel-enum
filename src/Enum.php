@@ -11,8 +11,8 @@ use Kpebedko22\Enum\Concerns\HasAttributes;
 use Kpebedko22\Enum\Concerns\HasOptionAttribute;
 
 /**
- * @method static static|null find(mixed $id)
- * @method static static findOrFail(mixed $id)
+ * @method static static|null find(mixed $key)
+ * @method static static findOrFail(mixed $key)
  * @method static Collection get()
  * @method static Collection pluck(mixed $value, mixed $key = null)
  * @method static Builder where(string|array $column, ?string $operator = null, mixed $value = null, string $boolean = 'and')
@@ -45,7 +45,7 @@ abstract class Enum implements Arrayable, ArrayAccess, Castable
     use HasAttributes,
         HasOptionAttribute;
 
-    protected string $primaryKey = 'id';
+    protected string $primaryKey = 'key';
 
     protected array $fillable = [];
 
@@ -113,11 +113,11 @@ abstract class Enum implements Arrayable, ArrayAccess, Castable
         return $this->getAttribute($this->getPrimaryKey());
     }
 
-    public static function isPrimaryKeyAvailable(mixed $id): bool
+    public static function isPrimaryKeyAvailable(mixed $key): bool
     {
         $keys = static::availablePrimaryKeys();
 
-        return in_array($id, $keys, true);
+        return in_array($key, $keys, true);
     }
 
     public static function availablePrimaryKeys(): array
