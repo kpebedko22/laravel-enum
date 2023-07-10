@@ -1,3 +1,6 @@
+bl:
+	docker-compose build
+
 ul:
 	docker-compose up -d
 
