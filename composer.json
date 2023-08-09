@@ -35,5 +35,12 @@
             "@test"
         ],
         "test": "phpunit --testdox"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Kpebedko22\\Enum\\EnumServiceProvider"
+            ]
+        }
     }
 }
